@@ -2,19 +2,33 @@ package src.pro.sky.java.course1.coursework1;
 
 public class Employee {
 
-    private final Name name;
-    public final int department; // отделы от 1 до 5
-    public final double salary;
-    public static int id;
+    private final String firstName;
+    private final String middleName;
+    private final String lastName;
+    private final int department; // отделы от 1 до 5
+    private final double salary;
+    private int id;
+    private static int idCounter = 1;
 
-    public Employee(Name name, int department, double salary) {//String firstName, String middleName, String lastName) {
-        this.name = name;
+    public Employee(String firstName, String middleName, String lastName, int department, double salary) {
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
         this.department = department;
         this.salary = salary;
+        this.id = idCounter++;
     }
 
-    public Name getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
     }
 
     public int getDepartment() {
@@ -23,6 +37,10 @@ public class Employee {
 
     public double getSalary() {
         return salary;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public int setDepartment() {
@@ -35,6 +53,10 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "№" + id + ": " + name + " ОТДЕЛ: " + department + " ЗАРПЛАТА: " + salary;
+        return "id: " + id +
+                " ФИО: " + lastName + " " + firstName + " " + middleName +
+                " ОТДЕЛ: " + department +
+                " ЗАРПЛАТА: " + salary;
     }
+
 }
