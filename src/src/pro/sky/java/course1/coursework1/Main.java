@@ -9,6 +9,7 @@ public class Main {
     static double sumSalaryDepartmen;
     static int choiceDepartment = 2;
     static int indexPercent = 10;
+    static int salarySelection = 50000;
 
     public static void main(String[] args) {
 
@@ -31,12 +32,14 @@ public class Main {
         PrintNameAllEmployee(); // Список всех сотрудников - только ФИО
 
         IndexingSalary(); // Индексация зарплат у всех сотрудников на ХЗ % // ДОРАБОТАТЬ !!!
-        SearchMinSalaryDepartment(); // Минимальная ЗП сотрудника по отделу
+        SearchMinSalaryDepartment(choiceDepartment); // Минимальная ЗП сотрудника по отделу
         SearchMaxSalaryDepartment(); // Максимальная ЗП сотрудника по отделу
         CalculationSumSalaryDepartment(); // Сумма затрат на зарплату в месяц по Отделу
         CalculationAveregeSalaryDepartment(); // Среднее значение зарплаты по Отделу
-        IndexingSalaryDepartment(); // Индексация зарплат по Отделу
+        IndexingSalaryDepartment(indexPercent); // Индексация зарплат по Отделу
         PrintEmployeeWithoutDepartment(); // Список всех сотрудников - без Отдела
+        PrintEmployeeSalaryDown(salarySelection); // Сотрудники с ЗП ниже указанной
+        PrintEmployeeSalaryUp(salarySelection); // Сотрудники с ЗП выше указанной
     }
 
     public static void PrintAllEmployee() {
@@ -86,7 +89,7 @@ public class Main {
 
     public static void PrintNameAllEmployee() {
         for (Employee employee : employee) {
-            System.out.println(employee.getId() + " " + employee.getLastName() + " " + employee.getFirstName() + " " + employee.getMiddleName());
+            System.out.println(employee.getId() + ": " + employee.getLastName() + " " + employee.getFirstName() + " " + employee.getMiddleName());
         }
     }
 
@@ -98,7 +101,7 @@ public class Main {
         }
     }
 
-    public static void SearchMinSalaryDepartment() {
+    public static void SearchMinSalaryDepartment(int choiceDepartment) {
         Employee[] employeeTest = new Employee[1];
         double minSalaryDepartment = Integer.MAX_VALUE;
         for (Employee employee : employee) {
@@ -129,7 +132,6 @@ public class Main {
     }
 
     public static void CalculationSumSalaryDepartment() {
-//        int choiceDepartment = 2;
         for (Employee employee : employee) {
             if (employee.getDepartment() == choiceDepartment) {
                 sumSalaryDepartmen += employee.getSalary();
@@ -151,7 +153,7 @@ public class Main {
                 " сотрудников = " + averegeSalaryInDepartment);
     }
 
-    public static void IndexingSalaryDepartment() {
+    public static void IndexingSalaryDepartment(int indexPercent) {
         for (Employee employee : employee) {
             if (employee.getDepartment() == choiceDepartment) {
                 newSalaryDepartent = employee.getSalary() + (employee.getSalary() * indexPercent / 100);
@@ -164,17 +166,28 @@ public class Main {
 
     public static void PrintEmployeeWithoutDepartment() {
         for (Employee employee : employee) {
-            System.out.println("id: " + employee.getId() + " ФИО: " + employee.getLastName()+ " " + employee.getFirstName() + " " +
-                    employee.getMiddleName() + " " + employee.getSalary());
+            System.out.println("id:" + employee.getId() + " ФИО: " + employee.getLastName()+ " " +
+                    employee.getFirstName() + " " + employee.getMiddleName() + " " + employee.getSalary());
         }
     }
-//        for (Employee[] employee : department {
-//            if (employee.getSalary() < minSalary) {
-//                minSalary = employee.getSalary();
-//                employeeBest[0] = employee;
-//            }
-//        }
-//        System.out.println("Минимальная зарплата = " + minSalary + " у сотрудника " + employeeBest[0].getLastName() + " из " +
-//                employeeBest[0].getDepartment() + " отдела");
 
+    public static void PrintEmployeeSalaryDown(int salarySelection) {
+        for (Employee employee : employee) {
+            if (employee.getSalary() < salarySelection) {
+                System.out.println("id:" + employee.getId() + " Сотрудник с ЗП ниже - " + salarySelection +
+                        " ФИО: " + employee.getLastName() + " " + employee.getFirstName() + " " + employee.getMiddleName() +
+                        " ЗП: " + employee.getSalary());
+            }
+        }
+    }
+
+    public static void PrintEmployeeSalaryUp(int salarySelection) {
+        for (Employee employee : employee) {
+            if (employee.getSalary() >= salarySelection) {
+                System.out.println("id:" + employee.getId() + " Сотрудник с ЗП выше или равно - " + salarySelection +
+                        " ФИО: " + employee.getLastName() + " " + employee.getFirstName() + " " + employee.getMiddleName() +
+                        " ЗП: " + employee.getSalary());
+            }
+        }
+    }
 }
