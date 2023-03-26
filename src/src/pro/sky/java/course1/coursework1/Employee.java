@@ -6,7 +6,7 @@ public class Employee {
     private final String middleName;
     private final String lastName;
     private final int department; // отделы от 1 до 5
-    private final double salary;
+    private double salary;
     private int id;
     private static int idCounter = 1;
 
@@ -47,7 +47,8 @@ public class Employee {
         return department;
     }
 
-    public double setSalary() {
+    public double setSalary(double salary) {
+        this.salary = salary;
         return salary;
     }
 
